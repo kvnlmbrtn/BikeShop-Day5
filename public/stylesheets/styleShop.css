@@ -8,6 +8,8 @@ body {
   font-family: 'Montserrat';
   margin: 0em auto 0 auto;
   color: white;
+  background: url('whitenoise.png'), linear-gradient(45deg, #FFC371, #FF5F6D);
+  padding-bottom: 5em;
 }
 
 
@@ -19,36 +21,22 @@ body {
 
 #bannerLogIn {
   display: block;
+  position: fixed;
+  top: 0;
+  z-index: 100;
   width: 100%;
   height: 10%;
+
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 
-  position: absolute;
-  top: 0;
-  color: #e82744;
-  z-index: 100;
+  color: white;
+  background-color: rgba(140, 140, 140, 0.8);
 }
 
-  #bannerLogIn button {
-    display: block;
-    border: 1px #e82744 solid;
-    border-radius: 30px;
-    margin: 1em 1em 1em 1em;
-    padding: 0.5em 0.5em 0.5em 0.5em;
-    text-align: center;
-    background-color: transparent;
-    color: #e82744;
-  }
 
-  #bannerLogIn button:hover {
-    cursor: pointer;
-    color: white;
-    background-color: #e82744;
-    border: none;
-  }
 
 
   .closeButtons {
@@ -135,11 +123,11 @@ body {
   justify-content: center;
   text-align: center;
 
-  background-image: url('/images/background-6.jpg');
+  /*background-image: url('/images/background-6.jpg');
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover;*/
 }
 
     #welcomeView #companyName {
@@ -190,102 +178,19 @@ body {
   color: black;
   display: block;
   background: white;
-  width: 100%;
+  width: 80%;
+
+  border-radius: 30px;
+  background-color: transparent;
+
+  padding: 4em 3em 4em 3em;
+
+  /*background-image: url("/images/background-2.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;*/
 }
-
-
-.avantages {
-  text-align: center;
-  color: white;
-}
-
-.avantages i {
-  font-size: 30px;
-  color: white;
-  margin: 1em auto 1em auto;
-}
-
-
-#bloc2 {
-  position: relative;
-  height: 400px;
-  color: black;
-  display: block;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-    #bloc2:after {
-      content: '';
-      display: block;
-      position: relative;
-      height: 100%;
-      width: 100%;
-
-      background-image: url('/images/background-2.jpg');
-      background-attachment: fixed;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-
-      opacity: 0.4;
-    }
-
-#bloc3 {
-  position: relative;
-  height: 600px;
-  color: black;
-  display: block;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-    #bloc3:after {
-      content: '';
-      display: block;
-      position: relative;
-      height: 100%;
-      width: 100%;
-
-      background-image: url('/images/background-3.jpg');
-      background-attachment: fixed;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-
-      opacity: 0.8;
-    }
-
-        #bloc2 p,
-        #bloc3 p {
-          position: absolute;
-          top:25%;
-          left: 0;
-          width: 100%;
-          height: 25%;
-          color: white;
-          font-size: 2.0em;
-          text-align: center;
-          text-decoration: none;
-          z-index: 3;
-        }
-
-        #bloc2 ul,
-        #bloc3 ul {
-          position: absolute;
-          top: 50%;
-          left: 0;
-          width: 100%;
-          height: 25%;
-          color: white;
-          font-size: 2.0em;
-          text-align: center;
-          text-decoration: none;
-          z-index: 3;
-        }
-
 
 
 .card-img-top {
@@ -299,14 +204,6 @@ body {
   margin-bottom: 1em;
 }
 
-.container-fluid {
-  padding: 4em 3em 4em 3em;
-  background-image: url("/images/background-2.jpg");
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 
 #headerShop {
   color: white;
@@ -323,67 +220,125 @@ body {
 /*----------------------------------------------------------------------*/
 /*----------------------------------------------------------------------*/
 
-/* Gestion du format des icones réseaux sociaux */
 
-.iconesRéseauxSociaux {
-		cursor: default;
-		list-style: none;
-		padding-left: 0;
-	}
-
-		.iconesRéseauxSociaux li {
-			display: inline-block;
-			padding: 0 0.65em 0 0;
-			margin: 0 1em 0 1em;
-		}
-
-			.iconesRéseauxSociaux li:first-child {
-				display: inline-block;
-				padding: 0 0.65em 0 0;
-				margin-left: 0;
-			}
+/* Mise en forme de la partie réseaux sociaux en bas de page */
 
 
-			.iconesRéseauxSociaux a {
-				text-decoration: none;
-			}
+#socialNetworks {
+position: relative;
+height: 600px;
+width: 80%;
+border-radius: 30px;
+margin: 3em auto 2em auto;
+display: block;
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
 
-      .iconesRéseauxSociaux a:hover {
-        text-decoration: none;
-        color: #e59e82;
-      }
+#socialNetworks:after {
+  content: '';
+  display: block;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  border-radius: 30px;
 
-		.fab {
-			display: inline-block;
-			border: solid 1px;
-			border-radius: 100%;
-			color: rgba(255, 255, 255, 0.8);
-			background: rgba(255, 255, 255, 0.2);
-		}
+  background-image: url('/images/background-3.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
-			.fab:hover {
-				display: inline-block;
-				border: solid 1px;
-				border-radius: 100%;
-				color: white;
-				background: rgba(229, 158, 130, 0.2);
-			}
+    #socialNetworks p {
+      position: absolute;
+      top:25%;
+      left: 0;
+      width: 100%;
+      height: 25%;
+      color: white;
+      font-size: 2.0em;
+      text-align: center;
+      text-decoration: none;
+      z-index: 3;
+    }
 
-			.fab:before {
-				display: block;
-				font-size: 1.25em;
-				width: 2em;
-				height: 2em;
-				text-align: center;
-				line-height: 2em;
-				color: white;
-			}
+    #socialNetworks ul {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 25%;
+      color: white;
+      font-size: 2.0em;
+      text-align: center;
+      text-decoration: none;
+      z-index: 3;
+    }
 
-				@media screen and (max-width: 400px) {
 
-					.iconesRéseauxSociaux li {
-						display: inline-block;
-						padding: 0 0.65em 0 0;
-						margin: 0 0.1em 0 0.1em;
-					}
-				}
+  /* Gestion du format des icones réseaux sociaux */
+
+  .iconesRéseauxSociaux {
+  		cursor: default;
+  		list-style: none;
+  		padding-left: 0;
+  	}
+
+  		.iconesRéseauxSociaux li {
+  			display: inline-block;
+  			padding: 0 0.65em 0 0;
+  			margin: 0 1em 0 1em;
+  		}
+
+  			.iconesRéseauxSociaux li:first-child {
+  				display: inline-block;
+  				padding: 0 0.65em 0 0;
+  				margin-left: 0;
+  			}
+
+
+  			.iconesRéseauxSociaux a {
+  				text-decoration: none;
+  			}
+
+        .iconesRéseauxSociaux a:hover {
+          text-decoration: none;
+          color: #e59e82;
+        }
+
+  		.fab {
+  			display: inline-block;
+  			border: solid 1px;
+  			border-radius: 100%;
+  			color: rgba(255, 255, 255, 0.8);
+  			background: rgba(255, 255, 255, 0.2);
+  		}
+
+  			.fab:hover {
+  				display: inline-block;
+  				border: solid 1px;
+  				border-radius: 100%;
+  				color: white;
+  				background: rgba(229, 158, 130, 0.2);
+  			}
+
+  			.fab:before {
+  				display: block;
+  				font-size: 1.25em;
+  				width: 2em;
+  				height: 2em;
+  				text-align: center;
+  				line-height: 2em;
+  				color: white;
+  			}
+
+  				@media screen and (max-width: 400px) {
+
+  					.iconesRéseauxSociaux li {
+  						display: inline-block;
+  						padding: 0 0.65em 0 0;
+  						margin: 0 0.1em 0 0.1em;
+  					}
+  				}
