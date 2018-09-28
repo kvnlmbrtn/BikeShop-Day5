@@ -41,3 +41,13 @@ sr.reveal('.fas', {
 	duration: 300,
 	delay: 1000
 });
+
+
+
+sr.reveal('.card', {
+		origin: 'bottom',
+		distance: '500px',
+		duration: 1000,
+		reset: true,
+	  useDelay: 'onload'
+	})
