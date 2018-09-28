@@ -58,7 +58,7 @@
             <div class="row">
 
 							<form class="formBasketQuantityChange" action="/update-item" method="get">
-								<input type="number" name="newQuantity" value="<%= panier[i].quantity %>" id="changeOfQuantityInput">
+								<input type="number" min="0" name="newQuantity" value="<%= panier[i].quantity %>" id="changeOfQuantityInput">
 								<input type="hidden" name="image" value="<%= panier[i].image %>">
 								<input type="hidden" name="model" value="<%= panier[i].model %>">
 								<input type="hidden" name="price" value="<%= panier[i].price %>">
@@ -95,9 +95,6 @@
         <div class="col-4 col-sm-2"><%=totalCmd%>€</div>
       </div>
 
-      <div class="row" id="card-checkout">
-        <div class="col-12 text-right"><button type="button" class="btn btn-outline-info btn-sm" name="button">Checkout</button></div>
-      </div>
 
     </div>
 

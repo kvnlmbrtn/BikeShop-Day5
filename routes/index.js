@@ -35,19 +35,18 @@ router.get('/shop', function(req, res, next){
 
   router.get("/basket", function(req, res, next) {
 
-    // On crée une variable de session éale au panier
+    // On crée une variable de session éale au panier s'il n'xiste pas
 
       if (typeof req.session.panier == "undefined") {
         req.session.panier = [];
         req.session.panier.push(catalogue[req.query.position]);
       }
 
-
       // Pour éviter de se retrouver avec une nouvelle ligne dès qu'un item est ajouté, on vérifie si cet item est présent dans le panier grâce à la valeur de la propriété inBasket dans la variable globale catalogue. Si true, alors on ajoute simplement 1 à la quantité du produit dans le panier. Sinon, on ajoute une card pour ce produit
 
       var isInBasket = false;
 
-      if (req.session.panier.length >0) {
+      if (req.session.panier.length >= 1 ) {
 
           for(var i=0; i <req.session.panier.length; i++) {
             if (req.session.panier[i].model == req.query.model){
@@ -61,6 +60,8 @@ router.get('/shop', function(req, res, next){
           }
 
         }
+
+      // On renvoie la route basket mise à jour
 
       res.render('basket', {userName: req.session.userName, panier: req.session.panier})
 
