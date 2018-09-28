@@ -1,62 +1,137 @@
+
 var express = require('express');
 var router = express.Router();
 
-//var dataCardBike =[];
+var catalogue = [
+  {image: "/images/bike-1.jpg", model: "BIKO45", price: 679, quantity: 0, inBasket: "false"},
+  {image: "/images/bike-2.jpg", model: "ZOOK7", price: 799, quantity: 0, inBasket: "false"},
+  {image: "/images/bike-3.jpg", model: "LIKO89", price: 839, quantity: 0, inBasket: "false"},
+  {image: "/images/bike-4.jpg", model: "GEWO", price: 1206, quantity: 0, inBasket: "false"},
+  {image: "/images/bike-5.jpg", model: "TITANS", price: 989, quantity: 0, inBasket: "false"},
+  {image: "/images/bike-6.jpg", model: "AMIG39", price: 599, quantity: 0, inBasket: "false"}
+]
+
+var userName;
+
 
 /* GET home page. */
+
 router.get('/', function(req, res, next) {
-  console.log("before", req.session.dataCardBike);
-  if(req.session.dataCardBike  == undefined) {
-    req.session.dataCardBike = [];
-  }
-  var dataBike = [
-    {name: "Model BIKO45", url:"/images/bike-1.jpg", price: 679},
-    {name: "Model ZOOK7", url:"/images/bike-2.jpg", price: 799},
-    {name: "Model LIKO89", url:"/images/bike-3.jpg", price: 839},
-    {name: "Model GEWO", url:"/images/bike-4.jpg", price: 1206},
-    {name: "Model TITAN5", url:"/images/bike-5.jpg", price: 989},
-    {name: "Model AMIG39", url:"/images/bike-6.jpg", price: 599}
-  ]
-  res.render('index', { dataBike:dataBike });
+  res.render('welcome', { userName: userName });
 });
 
-//route du panier
-router.get('/shop', function(req, res, next) {
-  res.render('shop', {dataCardBike: req.session.dataCardBike});
+
+router.post('/shop', function(req, res, next) {
+  req.session.userName = req.body.userName;
+  res.render('shop', { userName: req.session.userName, catalogue: catalogue });
 });
 
-//ajout dans le panier
-router.post('/add-shop', function(req, res, next) {
-  console.log(req.body);
+router.get('/shop', function(req, res, next){
+  res.render('shop', {userName: req.session.userName, catalogue: catalogue})
+})
 
-  var isUpdate = false;
-  for(var i=0; i <req.session.dataCardBike.length; i++) {
-    if (req.session.dataCardBike[i].name == req.body.name){
-      req.session.dataCardBike[i].quantity++;
-      isUpdate = true;
+
+  // Gestion de l'ajout d'un élément dans le panier
+
+  router.get("/basket", function(req, res, next) {
+
+    // On crée une variable de session éale au panier
+
+      if (typeof req.session.panier == "undefined") {
+        req.session.panier = [];
+        req.session.panier.push(catalogue[req.query.position]);
+        console.log(catalogue[req.query.position]);
+      }
+
+
+      // Pour éviter de se retrouver avec une nouvelle ligne dès qu'un item est ajouté, on vérifie si cet item est présent dans le panier grâce à la valeur de la propriété inBasket dans la variable globale catalogue. Si true, alors on ajoute simplement 1 à la quantité du produit dans le panier. Sinon, on ajoute une card pour ce produit
+
+      var isInBasket = "false";
+
+      if (typeof req.session.panier != "undefined") {
+        for (var i=0; i<req.session.panier; i++) {
+          if (req.session.panier[i].model == req.body.model) {
+            req.session.panier[i].quantity = Number (req.session.panier[i].quantity) + 1;
+            isInBasket = "true";
+          }
+          else {
+            req.session.panier.push(catalogue[req.query.position]);
+          }
+        }
+      }
+
+      res.render('basket', {userName: req.session.userName, panier: req.session.panier})
+
+
+
+
+      router.get('/delete-item', function(req, res, next) {
+
+
+          // Ici on supprime d'abord l'élément de la variable globale panier
+
+          for (var j=0; j<req.session.panier.length; j++) {
+            if (req.query.model == req.session.panier[j].model) {
+              req.session.panier.splice(j, 1);
+
+              // Il faut maintenant changer la valeur de la propriété inBasket dans la variable globale catalogue, sinon le vélo ne pourra plus être ajouté par la suite. De même on change la valeur de la propriété quantity à 0, comme ça si l'utilisateur clique à nouveau sur cet item, la quantité ajoutée au panier sera de 1, et non l'ancienne valeur + 1
+
+              for (var k=0; k<catalogue.length; k++) {
+                if (req.query.model == catalogue[k].model) {
+                  catalogue[k].inBasket = "false";
+                  catalogue[k].quantity = Number(0);
+                }
+                else {
+                  console.log("on ne fait rien");
+                }
+              }
+
+            }
+            else {
+              console.log("si ce message s'affiche il y aune erreur");
+            }
+          }
+
+          console.log(req.query);
+          res.render('basket', { panier: req.session.panier });
+      });
+
+
+      router.get('/update-item', function(req, res, next) {
+
+          for (var i=0; i<req.session.panier.length; i++) {
+            if (req.query.model == req.session.panier[i].model) {
+                req.session.panier[i].quantity = Number(req.query.newQuantity);
+
+                for (var j=0; j<req.session.panier.length; j++) {
+                  if (req.query.model == catalogue[j].model) {
+                      catalogue[j].quantity = Number(req.query.newQuantity);
+                  }
+                  else {
+                      console.log("la valeur n'a pas été modifiée pour ce produit");
+                  }
+                }
+
+            }
+
+            else {
+              console.log("la valeur n'a pas été modifiée pour ce produit");
+            }
+          }
+
+          res.render('basket', { panier: req.session.panier });
+      });
+
+      // Enfin, on renvoie la page basket mise à jour
+
+      res.render('basket', { panier: req.session.panier });
     }
-  }
+  )
 
-  if(isUpdate == false){
-    req.session.dataCardBike.push(req.body)
-  }
 
-  res.render('shop', {dataCardBike: req.session.dataCardBike});
-});
 
-//suppr d'un element du panier
-router.get('/delete-shop', function(req, res, next) {
 
-  req.session.dataCardBike.splice(req.query.position, 1)
 
-  res.render('shop', {dataCardBike: req.session.dataCardBike});
-});
 
-//modification d'un element du panier
-router.post('/update-shop', function(req, res, next) {
-  console.log(req.body);
-  req.session.dataCardBike[req.body.position].quantity = req.body.quantity;
-  res.render('shop', {dataCardBike: req.session.dataCardBike});
-});
 
 module.exports = router;

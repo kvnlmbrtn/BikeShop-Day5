@@ -1,5 +1,5 @@
 {
-  "name": "myapp",
+  "name": "express",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -12,7 +12,6 @@
     "express": "~4.16.0",
     "express-session": "^1.15.6",
     "http-errors": "~1.6.2",
-    "morgan": "~1.9.0",
-    "nodemon": "^1.18.4"
+    "morgan": "~1.9.0"
   }
 }

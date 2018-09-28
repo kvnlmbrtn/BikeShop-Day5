@@ -1,0 +1,33 @@
+body {
+  font-family:'Montserrat', sans-serif;
+  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  }
+
+#bannerLogIn {
+  display: block;
+}
+
+#signUpButton {
+  display: block;
+  position: relative;
+  width: 100%;
+  border: 1px #e82744 solid;
+  border-radius: 30px;
+  margin: 1em 1em 1em 1em;
+  padding: 0.5em 0.5em 0.5em 0.5em;
+  text-align: center;
+  background-color: transparent;
+  color: #e82744;
+}
+
+#signUpButton:hover {
+  cursor: pointer;
+  color: white;
+  background-color: #e82744;
+  border: none;
+}
